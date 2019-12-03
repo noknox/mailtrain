@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "mailtrain.fullname" . }}
+  labels:
+{{ include "mailtrain.labels" . | indent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.trustedPort }}
+      targetPort: trusted
+      protocol: TCP
+      name: trusted
+    - port: {{ .Values.service.sandboxPort }}
+      targetPort: sandbox
+      protocol: TCP
+      name: sandbox
+    - port: {{ .Values.service.publicPort }}
+      targetPort: public
+      protocol: TCP
+      name: public
+  selector:
+    app.kubernetes.io/name: {{ include "mailtrain.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
