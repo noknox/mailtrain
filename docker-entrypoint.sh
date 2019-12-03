@@ -113,8 +113,8 @@ while ! nc -z $MYSQL_HOST 3306; do sleep 1; done
 echo 'Info: Waiting for Redis Server'
 while ! nc -z $REDIS_HOST 6379; do sleep 1; done
 
-echo 'Info: Waiting for MongoDB Server'
-while ! nc -z $MONGO_HOST 27017; do sleep 1; done
+#echo 'Info: Waiting for MongoDB Server'
+#while ! nc -z $MONGO_HOST 27017; do sleep 1; done
 
 cd server
 NODE_ENV=production node index.js
